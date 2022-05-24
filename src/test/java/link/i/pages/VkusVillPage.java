@@ -3,18 +3,14 @@ package link.i.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
-import java.util.List;
-import java.util.TreeMap;
-
-import static com.codeborne.selenide.Selectors.byTagName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class VkusVillPage {
     // locators
     SelenideElement sideMenuOption = $(".shop-new-sidebar-catalog__wrapper"),
-                    sideMenuOptionSibling = $(".shop-new-sidebar-catalog__element__siblings"),
-                    contentTitle = $(".shop-page__content-title");
+            sideMenuOptionSibling = $(".shop-new-sidebar-catalog__element__siblings"),
+            contentTitle = $(".shop-page__content-title");
 
     public VkusVillPage openPage() {
         open("store/Vkusvill_msk");
@@ -22,7 +18,7 @@ public class VkusVillPage {
         return this;
     }
 
-    public VkusVillPage openSideMenu (String option, String item) {
+    public VkusVillPage openSideMenu(String option, String item) {
         sideMenuOption.find(byText(option)).click();
         contentTitle.shouldHave(Condition.text(option + " "));
         sideMenuOptionSibling.find(byText(item))
@@ -34,4 +30,11 @@ public class VkusVillPage {
         return this;
     }
 
+    public VkusVillPage sideMenuOptions(String option) {
+        sideMenuOption.find(byText(option))
+                .should(Condition.exist)
+                .shouldBe(Condition.visible)
+                .shouldBe(Condition.enabled);
+        return this;
+    }
 }
